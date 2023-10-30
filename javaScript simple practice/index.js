@@ -65,64 +65,64 @@ function
 
 //object
 
-let person = { //person object 
-    name : 'Rup',  //properties of person objsc
-    age : 25,
-    city: "tangail"
-};
+// let person = { //person object 
+//     name : 'Rup',  //properties of person objsc
+//     age : 25,
+//     city: "tangail"
+// };
 
-// change property value
+// // change property value
 
-//dot notation
-person.name = 'Mohaiminul'
+// //dot notation
+// person.name = 'Mohaiminul'
 
-//bracket notation
-person['age'] = 27;
+// //bracket notation
+// person['age'] = 27;
 
-let changeCIty = 'city';
-person[changeCIty] = 'dhaka'
+// let changeCIty = 'city';
+// person[changeCIty] = 'dhaka'
 
-console.log(person);
-console.log(person.name)
+// console.log(person);
+// console.log(person.name)
 
 
 
 //object
 // array is an object in javascript
-//array type object
+// //array type object
 
 
-let selecedColor = ['red', 'blue']; 
-selecedColor[2] = 'green'; //adding more value in next length
-selecedColor[3] = 1
-console.log(selecedColor);
-console.log(selecedColor[2]);//show specific value
-console.log(selecedColor.length);
+// let selecedColor = ['red', 'blue']; 
+// selecedColor[2] = 'green'; //adding more value in next length
+// selecedColor[3] = 1
+// console.log(selecedColor);
+// console.log(selecedColor[2]);//show specific value
+// console.log(selecedColor.length);
 
 
 //function
 
-function sample()
-{
-    console.log('sample function')
-}
+// function sample()
+// {
+//     console.log('sample function')
+// }
 
-sample();
+// sample();
 
-function hello(name, age)
-{
-    console.log('my name is ' + name + ', age ' + age)
-}
+// function hello(name, age)
+// {
+//     console.log('my name is ' + name + ', age ' + age)
+// }
 
-hello ("Rup", 25);
-hello ("mohaiminul" , 27)
+// hello ("Rup", 25);
+// hello ("mohaiminul" , 27)
 
-function square(number)
-{
-    return number * number;
-}
+// function square(number)
+// {
+//     return number * number;
+// }
 
-console.log(square(8))
+// console.log(square(8))
 
 
 
@@ -204,12 +204,32 @@ console.log(square(8))
 
 
 
+//======================event handler=======================
+
+
+// function myMessage1()
+//         {
+//             alert("hello function1");
+//         }
+// function myMessage2()
+//         {
+//             alert("hello function2");
+//         }
 
 
 
 
+var myVar = document.querySelector("#img");
 
 
+function myMessage1()
+{   
+    myVar.src = "image/image.jpg"
+}
 
+function myMessage2()
+{
+    myVar2.src = "image/image.jpg"
+}
 
 

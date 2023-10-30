@@ -1,0 +1,39 @@
+      javascript
+----------------------
+number method
+add or concatenate strings
+library function
+arithmatic and assignment operator
+""a small calculator""
+if else
+for loop
+DOM
+query selector
+event handler
+event listeners
+dom events
+
+to be continue...
+
+
+
+
+
+         node js
+---------------------------
+global object and module system theory
+node server and core modules theory
+local module
+fs module
+os and path module
+
+to be continue...
+
+
+
+
+
+
+
+
+
