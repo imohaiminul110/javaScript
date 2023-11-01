@@ -1,0 +1,14 @@
+npm init -y
+
+npm install express nodemon
+
+package.json -->
+
+script :
+"start" : "nodemon index.js"
+
+
+npm start
+
+
+
