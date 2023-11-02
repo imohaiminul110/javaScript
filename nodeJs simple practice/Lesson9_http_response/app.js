@@ -20,11 +20,6 @@ app.use((req, res)=>
     res.send ("this is error get")
 })
 
-app.use("/sign",(req, res)=>
-{
-    
-    res.send("this is sign get")
-})
 
 
 module.exports = app
