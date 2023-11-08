@@ -1,0 +1,8 @@
+.env file will not be upload anywhere 
+.gitignore file will be user for not uploading in git hub
+
+for using env need to install npm module
+
+npm install dotenv
+
+env file need to be in root folder
