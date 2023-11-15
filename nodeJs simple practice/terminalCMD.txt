@@ -10,5 +10,6 @@ script :
 
 npm start
 
-
+touch app.js // create a new file
+mkdir views // create folder
 

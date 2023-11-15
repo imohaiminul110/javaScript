@@ -1,0 +1,3 @@
+rest ==> representational state transfer
+api =>   application programming interface
+environment variable ==> set PORT = 5000
