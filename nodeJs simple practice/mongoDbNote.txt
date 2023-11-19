@@ -1,3 +1,20 @@
+
+        sql                 no sql
+      ========           ============
+     relational           non-relational
+     table                collection
+     row                  document
+     collumn              field  
+
+
+no sql 
+Database ---> colections(table) ---> documents (row)
+
+
+
+
+
+
 mongosh
 test-> show dbs  ---- show all the database
 db
@@ -95,11 +112,6 @@ npm install --save--dev nodemon
 nodemon app ---->> difference
 
 access modifier ba return ki function e use kora lage na
-
-
-
-no sql 
-Database ---> colections(table) ---> documents (row)
 
 
 {"title": "prince","author": "mon","pages": "100","rating": "5","genres": ["chillings", "playing"]}
