@@ -1,3 +1,4 @@
+console.log("9")
 const User = require("../models/user.model")
 const passport = require("passport");
 const bcrypt = require("bcrypt");
@@ -9,7 +10,7 @@ passport.use(new LocalStrategy(
     
     async (username, password, done) => {
         try {
-            console.log("6")
+            console.log("6555")
             const user = await User.findOne({ username: username }) //user ke khuje neoar chesta krbo 
             if (!user) { 
                 return done(null, false, {message: "incorrect username"} ); //jdi 10 no line e user ke khuje na pay tobe incorrect 
@@ -21,7 +22,6 @@ passport.use(new LocalStrategy(
         } catch (error) {
             return done(err);
         }
-     
     }
   )); 
 

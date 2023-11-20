@@ -66,46 +66,56 @@ app.post("/register", async (req, res)=>
             });
         console.log("5")
         await newUser.save();
+        console.log("6")
         res.redirect("/login")
+        console.log("7")
         });
         
     } catch(error) {
         res.status(500).send(error.message);
     }
 })
-// const checkLoggedIn = (req, res, next) => {
-//     if (req.isAuthenticated()) {
-//       return res.redirect("/profile");
-//     }
-//     next();
-//   };
+
+const checkLoggedIn = (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return res.redirect("/profile");
+    }
+    next();
+  };
 
 // login get
 
-app.get("/login",  (req, res)=>
+app.get("/login", checkLoggedIn, (req, res)=>
 {
     res.render("login")
 })
 
 //login post
 app.post('/login', 
-  passport.authenticate('local', { 
-    failureRedirect: '/register',
-    successRedirect: "/profile", })
- 
-)
+passport.authenticate('local', 
+{ failureRedirect: '/login',
+successRedirect: "/profile", }))
+{
+    console.log("8")
+}
   
-//   const checkAuthenticated = (req, res, next) => {
-//     if (req.isAuthenticated()) {
-//       return next();
-//     }
-//     res.redirect("/login");
-//   };
+  const checkAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        console.log("9")
+      return next();
+      console.log("10")
+    }
+    res.redirect("/login");
+    console.log("11")
+  };
 
 
 //profile protected route
-app.get("/profile",  (req, res) => {
-    res.render("profile");
+app.get("/profile", checkAuthenticated, (req, res) => {
+    {
+        console.log("17")
+        res.render("profile");
+    }  
   });
 // app.get("/profile", (req, res)=>
 // {
@@ -115,7 +125,21 @@ app.get("/profile",  (req, res) => {
 // logout 
 app.get("/logout", (req, res)=>
 {
-    res.redirect("/")
+    try {
+        console.log("12")
+        req.logout((err)=>{
+            console.log("13")
+            if(err){
+                console.log("14")
+                return next(err);
+            }
+            console.log("15")
+            res.redirect("/")
+        })
+    } catch (error) {
+        console.log("16")
+        res.status(500).send(error.message);
+    }
 })
 
 
