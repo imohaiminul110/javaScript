@@ -3,14 +3,14 @@ const cors = require("cors")
 const ejs = require("ejs")
 const app = express();
 require("./config/database")
-require("./config/passport")
 require("dotenv").config();
+require("./config/passport")
 const User= require("./models/user.model")
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-
-const passport = require("passport");
+const passport = require("passport")
 const session = require("express-session")
+
 const MongoStore = require("connect-mongo")
 
 app.set("view engine", "ejs");
@@ -20,11 +20,12 @@ app.use(express.json());
 
 
 app.set('trust proxy', 1) // trust first proxy
-app.use(session({
+app.use(
+    session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  Store: MongoStore.create({
+  store: MongoStore.create({
     mongoUrl:  process.env.MONGO_URL,
     collectionName: "sessions",
   })
@@ -61,22 +62,27 @@ app.post("/register", async (req, res)=>
         bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
             const newUser = new User ({
                 username : req.body.username,
-                password : hash
+                password : hash,
             });
         console.log("5")
         await newUser.save();
-        res.status(201).redirect("/login")
+        res.redirect("/login")
         });
         
     } catch(error) {
         res.status(500).send(error.message);
     }
 })
-
+// const checkLoggedIn = (req, res, next) => {
+//     if (req.isAuthenticated()) {
+//       return res.redirect("/profile");
+//     }
+//     next();
+//   };
 
 // login get
 
-app.get("/login", (req, res)=>
+app.get("/login",  (req, res)=>
 {
     res.render("login")
 })
@@ -84,19 +90,27 @@ app.get("/login", (req, res)=>
 //login post
 app.post('/login', 
   passport.authenticate('local', { 
-    failureRedirect: '/login',
-    successsRedirect: "/profile" })
+    failureRedirect: '/register',
+    successRedirect: "/profile", })
  
-  )
+)
   
-
+//   const checkAuthenticated = (req, res, next) => {
+//     if (req.isAuthenticated()) {
+//       return next();
+//     }
+//     res.redirect("/login");
+//   };
 
 
 //profile protected route
-app.get("/profile", (req, res)=>
-{
-    res.render("profile")
-})
+app.get("/profile",  (req, res) => {
+    res.render("profile");
+  });
+// app.get("/profile", (req, res)=>
+// {
+//     res.render("profile")
+// })
 
 // logout 
 app.get("/logout", (req, res)=>

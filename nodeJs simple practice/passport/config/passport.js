@@ -1,18 +1,20 @@
-const user = require("../models/user.model")
+const User = require("../models/user.model")
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const User = require("../models/user.model");
+// const User = require("../models/user.model");
 const LocalStrategy = require("passport-local").Strategy;
 
 
 passport.use(new LocalStrategy(
+    
     async (username, password, done) => {
         try {
+            console.log("6")
             const user = await User.findOne({ username: username }) //user ke khuje neoar chesta krbo 
             if (!user) { 
                 return done(null, false, {message: "incorrect username"} ); //jdi 10 no line e user ke khuje na pay tobe incorrect 
              }
-             if(!bcrypt.compare(password.user.password)){
+             if(!bcrypt.compare(password,user.password)){
                 return done(null, false, {message: "incorrect password"} ); 
              }
              return done(null, user); // jodi 10 no line e user ke khuje pay to return krbe 
@@ -21,7 +23,7 @@ passport.use(new LocalStrategy(
         }
      
     }
-  ));
+  )); 
 
   //create session id
   //log in korar shomoy user id create krbe session er vetor
@@ -42,3 +44,5 @@ passport.use(new LocalStrategy(
         done(error, false)
     }
   })
+
+  module.exports = passport;
