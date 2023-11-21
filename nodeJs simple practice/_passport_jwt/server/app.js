@@ -5,13 +5,14 @@ const cors = require("cors")
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const ejs = require("ejs")
 
 const User = require("./models/user.model");
-const { redirect } = require("statuses");
+
 const saltRounds = 10;
 require("./config/database")
 
-
+app.set("view engine", "ejs")
 app.use(cors());
 app.use(express.urlencoded({extended: true}))
 app.use(express.json());
@@ -22,10 +23,16 @@ require("./config/passport")
 //home route
 
 app.get("/", (req,res)=>{
-    res.send("welcome home")
+    res.render("index")
 })
 
-//register route
+//register route get
+
+app.get("/register", (req,res)=>{
+    res.render("register")
+})
+
+//register route post
 
 app.post("/register", async (req,res)=>{
     const user = await User.findOne({username: req.body.username})
@@ -56,7 +63,13 @@ app.post("/register", async (req,res)=>{
     });    
 })
 
-//login route
+//login route get
+
+app.get("/login", (req,res)=>{
+    res.render("login")
+})
+
+//login route post
 
 app.post("/login", async (req,res)=>{
    const user = await User.findOne({username: req.body.username})
@@ -80,7 +93,7 @@ app.post("/login", async (req,res)=>{
    const token = jwt.sign(payload, process.env.SECRET_KEY, {
     expiresIn: "2d",
    })
-   
+
  res.redirect("/profile")
 //    return res.send({
 //     success: true,
