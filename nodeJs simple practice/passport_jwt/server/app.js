@@ -30,7 +30,7 @@ app.get("/register", async (req,res)=>
         function(err,hash){
                 const newUser = new User({  
                 username : req.body.username,
-                password : req.body.password
+                password : hash
 
         })
     
