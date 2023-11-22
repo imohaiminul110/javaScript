@@ -93,6 +93,7 @@ app.post("/login", async (req,res)=>{
    const token = jwt.sign(payload, process.env.SECRET_KEY, {
     expiresIn: "2d",
    })
+   
 
  res.redirect("/profile")
 //    return res.send({
