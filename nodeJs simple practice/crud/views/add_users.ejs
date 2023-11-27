@@ -1,0 +1,25 @@
+<%- include('layout/header') %> 
+<main>
+    <H1>Add users page</H1>
+    <form action="/add_users" method="post" enctype="multipart/form-data">
+        <div>
+          <label for="name">name: </label>
+          <input type="text" id="name" name="name" required/>
+        </div>
+        <br />
+        <div>
+          <label for="Email">Email: </label>
+          <input type="Email" id="Email" name="Email" required/>
+        </div>
+        <div>
+          <label for="phone">role: </label>
+          <input type="phone" id="phone" name="phone" required/>
+        </div>
+        <br/>
+        <div>
+            <label for="image">image</label>
+            <input type="file" name="image" id="image" name="image" required />
+        </div>
+        <button type="submit">add user</button>
+      </form>
+</main>
