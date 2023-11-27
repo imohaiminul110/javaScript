@@ -20,10 +20,10 @@ Router.get("/login", authController.GetloginUser)
 Router.post("/login", authController.loginUser);
 
 // Device profile route
-Router.get('/profile/device/:username', passport.authenticate('jwt', { session: false }), authController.deviceProfile);
+Router.get('/device/:username', passport.authenticate('jwt', { session: false }), authController.deviceProfile);
 
 // IT profile route
-Router.get('/profile/it/:username', passport.authenticate('jwt', { session: false }), authController.itProfile);
+Router.get('/it/:username', passport.authenticate('jwt', { session: false }), authController.itProfile);
 
 // Logout route
 Router.get('/logout' , authController.logout);

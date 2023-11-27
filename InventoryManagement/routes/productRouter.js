@@ -1,32 +1,19 @@
 const express = require("express")
 const productRouter = express.Router();
-const cors = require("cors");
-const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
-const passport = require('passport');
-const ejs = require("ejs");
-
-const User = require("../models/user.model");
-
-
-const saltRounds = 10;
 require("../config/database");
+const productController = require("../controller/productController")
 
-// app.set("view engine", "ejs");
-// app.use(cors());
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-// app.use(passport.initialize());
 
-require("../config/passport");
+//product home route
+productRouter.get('/', productController.productHome)
 
-console.log("product router : 1");
+//add product route -- get 
+productRouter.get('/addProduct',  productController.addProduct)
 
-productRouter.get('/', (req,res)=>{
-    //res.send("abc")
-    res.send("abc")
-    console.log("object");
-})
+//add product route -- post
+productRouter.post('/addProduct', productController.addProductPost)
 
+//catagory route -- POST
+productRouter.post('/addCategory' , productController.addCategoryPost)
 
 module.exports = productRouter;

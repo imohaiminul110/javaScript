@@ -86,7 +86,7 @@ exports.loginUser = async (req, res) => {
             success: true,
             message: `Logged in as ${user.role}`,
             token: "Bearer " + token,
-            redirect: `/profile/${user.role.toLowerCase()}/${user.username.toLowerCase()}`, // Dynamic redirection
+            redirect: `/${user.role.toLowerCase()}/${user.username.toLowerCase()}`, // Dynamic redirection
         });
     } catch (error) {
         console.error(error);
