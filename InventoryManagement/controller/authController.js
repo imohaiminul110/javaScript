@@ -1,11 +1,9 @@
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
-const passport = require('passport');
+const passport = require('../config/passport');
 const User = require("../models/user.model");
 
 const saltRounds = 10;
-
-
 
 //home controller
 exports.index = (req,res)=>{
@@ -131,6 +129,24 @@ exports.itProfile = (req, res) => {
         res.status(403).json({ message: 'Permission Denied: Access restricted.' });
     }
 };
+
+// admin controller
+exports.adminDashboard = (req, res) => {
+    if (req.user.role.toLowerCase() === 'admin') {
+        res.send({
+            success: true,
+            message: 'Admin Dashboard',
+            user: {
+                id: req.user._id,
+                username: req.user.username,
+                role: req.user.role,
+            },
+        });
+    } else {
+        res.status(403).json({ message: 'Permission Denied: Access restricted.' });
+    }
+};
+
 
 //logout controller
 
