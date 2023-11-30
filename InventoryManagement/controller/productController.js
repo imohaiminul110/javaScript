@@ -8,7 +8,8 @@ const saltRounds = 10;
 
 
 const product = require("../models/product.model");
-const category = require("../models/category.model")
+const category = require("../models/category.model");
+const { name } = require("ejs");
 
 //product home
 exports.productHome = (req, res) => {
@@ -223,3 +224,45 @@ exports.addCategoryPost = async(req, res)=>{
         console.log("category fucked")
     }
 }
+
+
+
+
+
+//i think complexe
+
+
+
+// Assign a product to an employee (admin only)
+exports.assignProductToEmployee = async (req, res) => {
+  try {
+    const { adminId, employeeId, productId } = req.body;
+
+    // Check if the requester is an admin
+    const admin = await User.findByName(username);
+    if (!admin || admin.role !== 'admin') {
+      return res.status(403).send('Unauthorized: Only admins can assign products.');
+    }
+
+    // Check if the employee exists
+    const employee = await User.findById(employeeId);
+    if (!employee || employee.role !== 'employee') {
+      return res.status(404).send('Employee not found');
+    }
+
+    // Create an assignment
+    const assignment = new Assignment({
+      user: employeeId,
+      product: productId,
+    });
+
+    // Save the assignment to the database
+    await assignment.save();
+
+    res.json({ message: 'Product assigned to employee successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error assigning product to employee');
+  }
+};
+
