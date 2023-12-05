@@ -286,6 +286,39 @@ exports.getAllCategories = async (req, res) => {
   }
 };
 
+
+
+
+
+const Category = require('path/to/CategoryModel'); // Import your Category model
+const Product = require('path/to/ProductModel'); // Import your Product model
+
+// ...
+
+// Get all products for a given category name
+// exports.getAllProductsInCategory = async (req, res) => {
+//   const categoryName = req.params.categoryName; // Assuming the category name is in the request parameters
+
+//   try {
+//     // Find the category with the specified name
+//     const foundCategory = await Category.findOne({ categoryName });
+
+//     if (!foundCategory) {
+//       return res.status(404).send('Category not found');
+//     }
+
+//     // Retrieve the associated products for the found category
+//     const productsInCategory = await Product.find({ category: foundCategory._id });
+
+//     res.json(productsInCategory);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send(`Error retrieving products in the "${categoryName}" category`);
+//   }
+// };
+
+
+
 // Get all products where category name is "food"
 exports.getAllProductsInCategory = async (req, res) => {
   try {
