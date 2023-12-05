@@ -2,26 +2,80 @@ const jwt = require('jsonwebtoken');
 const passport = require('../config/passport');
 const product = require("../models/product.model");
 const category = require("../models/category.model");
-const multer = require("multer")
-const path = require('path');
+// Modify your Multer configuration in product.controller.js
+const multer = require("multer");
+//const path = require('path');
 
 
+//define storage
 
-
-//image upload
-
-var storage = multer.diskStorage({
-  destination: function(req, file, cb){
-      cb(null, "./upload")
-  },
-  filename: function (req, file ,cb){
-      cb (null, file.fieldname + "_" + Date.now()+"_"+file.originalname);
+const Storage = multer.diskStorage({
+  destination: "uploads",
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
   }
-});
-const upload = multer({ storage: storage });
+})
+
+const upload = multer({
+  storage : Storage
+}).single('testImage')
 
 
-module.exports = upload;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // Define storage
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, path.join(__dirname, '..', 'uploads')); // Adjust the destination path as needed
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+//   }
+// });
+
+// // Create multer instance with the defined storage
+// const upload = multer({ storage: storage });
+
+// // Export the upload middleware
+// module.exports = upload;
+
+
+
+
+
+// const multer = require("multer")
+// const path = require('path');
+
+
+
+
+// //image upload
+
+// var storage = multer.diskStorage({
+  
+//   destination: function(req, file, cb){
+//     cb(null, path.join(__dirname, '..', 'uploads'));
+//   },
+//   filename: function (req, file ,cb){
+//       cb (null, file.fieldname + "_" + Date.now()+"_"+file.originalname);
+//   }
+// });
+
+// const upload = multer({ storage: storage });
+
+
+// module.exports = upload;
 
 
 
@@ -51,58 +105,165 @@ exports.productHome = (req, res) => {
   }
 };
 
+exports.addProductPost = async (req,res)=> {
+  try{
+    upload(req,res, async (err)=>{
+      if(err){
+        console.log(err);
+      }
+      else
+      {
+        
+  //Check if the provided category exists
+        let existingCategory = await category.findOne({ categoryName: category });
 
+        // If the category doesn't exist, create a new category
+        if (!existingCategory) {
+          console.log("Creating a new category:", category);
+          existingCategory = new category({
+            categoryName: category,
+          });
+          await existingCategory.save();
+        }
 
-
-// add product ccontroller -- post
-exports.addProductPost = async (req, res) => {
-
-  try {
-    // Check if the authenticated user's role is admin or employee
-    if (req.user && req.user.role.toLowerCase() === 'admin' || 'employee' ) {
       
-    const { name, description, price,quantity,manufacturer,imageUrl,createdAt,category } = req.body;
-
-    // Check if the provided category exists
-    let existingCategory = await category.findOne({ categoryName });
-
-    // If the category doesn't exist, create a new category
-    if (!existingCategory) {
-      console.log("Creating a new category:", categoryName);
-      existingCategory = new category({
-        categoryName,
-      });
-      await existingCategory.save();
-    }
-
-    const newProduct = new product({
-      name,
-      description,
-      price,
-      quantity,
-      manufacturer,
-      imageUrl,
-      createdAt,
-      category: existingCategory._id,
-    });
-
-    const savedProduct = await newProduct.save();
-
-    // Update the category to include the newly created product
-    existingCategory.products.push(savedProduct._id);
-    await existingCategory.save();
-
-    res.send("Product added");
-  } 
-  else{
-    return res.status(403).json({ message: 'Permission Denied: Access restricted.' });
+          const newProduct = new product({
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            quantity: req.body.quantity,
+            manufacturer: req.body.manufacturer,
+            imageUrl : {
+              data: req.file.filename,
+              contentType : 'image/png'
+  
+            },
+            createdAt: req.body.createdAt,
+            category: existingCategory._id, 
+  
+          })
+          newProduct.save()
+          .then(() => res.send("image uploaded"))
+          .catch((err) => console.log(err));
+        
+      
+        }
+        
+      })
   }
-  }
-  catch (error) {
-    console.error(error);
-    res.status(500).send("Error adding product");
+  catch{
+    res.send("something went wrong");
   }
 }
+
+
+
+// // Update your product.controller.js
+// exports.addProductPost = async (req, res) => {
+//   try {
+//     upload(req, res, async (err)=>{
+//       // Check if the authenticated user's role is admin or employee
+//     if (req.user && (req.user.role.toLowerCase() === 'admin' || req.user.role.toLowerCase() === 'employee')) {
+
+//       const { name, description, price, quantity, manufacturer, createdAt, category } = req.body;
+
+//       // Check if the provided category exists
+//       let existingCategory = await category.findOne({ categoryName: category });
+
+//       // If the category doesn't exist, create a new category
+//       if (!existingCategory) {
+//         console.log("Creating a new category:", category);
+//         existingCategory = new category({
+//           categoryName: category,
+//         });
+//         await existingCategory.save();
+//       }
+
+//       const imageUrl = req.file ? req.file.path : ''; // Get the image URL from the uploaded file
+
+//       const newProduct = new product({
+//         name,
+//         description,
+//         price,
+//         quantity,
+//         manufacturer,
+//         imageUrl,
+//         createdAt,
+//         category: existingCategory._id,
+//       });
+
+//       const savedProduct = await newProduct.save();
+
+//       // Update the category to include the newly created product
+//       existingCategory.products.push(savedProduct._id);
+//       await existingCategory.save();
+
+//       res.send("Product added");
+//     } else {
+//       return res.status(403).json({ message: 'Permission Denied: Access restricted.' });
+//     }
+//     })
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Error adding product");
+//   }
+// }
+
+
+
+
+
+
+// // add product ccontroller -- post
+// exports.addProductPost = async (req, res) => {
+
+//   try {
+//     // Check if the authenticated user's role is admin or employee
+//     if (req.user && req.user.role.toLowerCase() === 'admin' || 'employee' ) {
+      
+//     const { name, description, price,quantity,manufacturer,createdAt,category } = req.body;
+
+//     // Check if the provided category exists
+//     let existingCategory = await category.findOne({ categoryName :category });
+
+//     // If the category doesn't exist, create a new category
+//     if (!existingCategory) {
+//       console.log("Creating a new category:", category);
+//       existingCategory = new category({
+//         categoryName : category
+//       });
+//       await existingCategory.save();
+//     }
+//     const imageUrl = req.file ? req.file.path : ''; // Get the image URL from the uploaded file
+
+//     const newProduct = new product({
+//       name,
+//       description,
+//       price,
+//       quantity,
+//       manufacturer,
+//       imageUrl,
+//       createdAt,
+//       category: existingCategory._id,
+//     });
+
+//     const savedProduct = await newProduct.save();
+
+//     // Update the category to include the newly created product
+//     existingCategory.products.push(savedProduct._id);
+//     await existingCategory.save();
+
+//     res.send("Product added");
+//   } 
+//   else{
+//     return res.status(403).json({ message: 'Permission Denied: Access restricted.' });
+//   }
+//   }
+//   catch (error) {
+//     console.error(error);
+//     res.status(500).send("Error adding product");
+//   }
+// }
 
 
 

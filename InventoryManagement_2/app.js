@@ -9,7 +9,7 @@ const User = require("./models/user.model");
 const authRouter = require("./routes/authRouter")
 const userRouter = require("./routes/userRouter")
 const productRouter = require("./routes/productRouter")
-
+const database = require("./config/database")
 const passport = require('passport');
 app.use(passport.initialize());
 app.set("view engine", "ejs");
@@ -19,13 +19,13 @@ app.use(express.json());
 
 
 // product route
-app.use('/product', productRouter) 
+app.use('/api/product', productRouter) 
 
 // Home, login, register route
-app.use('/', authRouter)
+app.use('/api/', authRouter)
 
 //user route
-app.use('/user', userRouter)
+app.use('/api/user', userRouter)
 
 
 

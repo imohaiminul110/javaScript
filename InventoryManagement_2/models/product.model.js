@@ -22,8 +22,8 @@ const productSchema = mongoose.Schema({
         trim: true,
       },
       imageUrl: {
-        type: String,
-        trim: true,
+        data: Buffer,
+        contentType: String
       },
       createdAt: {
         type: Date,

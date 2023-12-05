@@ -1,17 +1,23 @@
 const express = require("express")
 const productRouter = express.Router();
-require("../config/database");
-const productController = require("../controller/productController")
+//require("../config/database");
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const upload = require('..controller/productController/upload');
+
+// Update your productRouter in routes.js
+const productController = require('../controller/productController');
+//const upload = require('../controller/productController'); // Import the upload middleware
+
+
+
+// const productController = require("../controller/productController")
+// const upload = require('../controller/productController');
 
 //product home route
 productRouter.get('/', passport.authenticate('jwt', { session: false }), productController.productHome)
 
 
 //add product route -- post
-productRouter.post('/addProduct', upload.single('image'), passport.authenticate('jwt', { session: false }),  productController.addProductPost)
+productRouter.post('/addProduct',  passport.authenticate('jwt', { session: false }), productController.addProductPost);
 
 //catagory route -- POST
 productRouter.post('/addCategory' , productController.addCategoryPost)
