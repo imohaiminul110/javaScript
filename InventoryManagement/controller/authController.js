@@ -155,3 +155,11 @@ exports.logout =  (req, res) => {
     res.clearCookie('token');
     res.redirect('/');
 }
+
+
+// "email": "aa@gmail.com",
+// "role" : "admin",
+// "department" : "IT",
+// "fullname" : "Aa aa",
+// "phoneNumber" : "0123456789",
+// "address" : "dhaka"

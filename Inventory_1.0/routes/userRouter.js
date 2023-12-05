@@ -1,21 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const userController = require ("../controllers/userController")
+const mongoose = require("mongoose");
 
+router.get("/", userController.home)
+router.post("/register", userController.registerUser)
 
-router.get("/", (req,res)=>{
-    res.send("abc")
-})
-
-router.post("/register", (req,res)=>{
-    res.send("abc")
-})
-// Define user routes
-//router.post('/register', );
-router.post('/login', );
-router.patch('/approve/:userId', /* Your admin approval controller */);
-router.get('/profile', /* Your user profile controller */);
-router.patch('/profile', /* Your update user profile controller */);
-router.post('/logout', /* Your logout controller */);
+router.post('/login', userController.loginUser );
+router.patch('/approve/:userId',  );
+router.get('/profile', );
+router.patch('/profile', );
+router.post('/logout', );
 
 
 module.exports = router;

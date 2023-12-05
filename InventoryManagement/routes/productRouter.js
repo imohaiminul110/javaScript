@@ -37,7 +37,7 @@ productRouter.delete('/products/:productName', productController.deleteProductBy
 productRouter.post('/assignProductToEmployee', productController.assignProductToEmployee);
 
 // Define the route to request a product for approval
-productRouter.post('/requestProductApproval', productController.requestProductApproval);
+// productRouter.post('/requestProductApproval', productController.requestProductApproval);
 
 
 // Define the route to update a product by name
