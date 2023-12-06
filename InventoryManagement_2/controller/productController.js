@@ -22,71 +22,6 @@ const upload = multer({
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// // Define storage
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, path.join(__dirname, '..', 'uploads')); // Adjust the destination path as needed
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
-//   }
-// });
-
-// // Create multer instance with the defined storage
-// const upload = multer({ storage: storage });
-
-// // Export the upload middleware
-// module.exports = upload;
-
-
-
-
-
-// const multer = require("multer")
-// const path = require('path');
-
-
-
-
-// //image upload
-
-// var storage = multer.diskStorage({
-  
-//   destination: function(req, file, cb){
-//     cb(null, path.join(__dirname, '..', 'uploads'));
-//   },
-//   filename: function (req, file ,cb){
-//       cb (null, file.fieldname + "_" + Date.now()+"_"+file.originalname);
-//   }
-// });
-
-// const upload = multer({ storage: storage });
-
-
-// module.exports = upload;
-
-
-
-
-
-
-
-
-
-
-
 //product home
 exports.productHome = (req, res) => {
   try {
@@ -156,124 +91,7 @@ exports.addProductPost = async (req,res)=> {
   }
 }
 
-
-
-// // Update your product.controller.js
-// exports.addProductPost = async (req, res) => {
-//   try {
-//     upload(req, res, async (err)=>{
-//       // Check if the authenticated user's role is admin or employee
-//     if (req.user && (req.user.role.toLowerCase() === 'admin' || req.user.role.toLowerCase() === 'employee')) {
-
-//       const { name, description, price, quantity, manufacturer, createdAt, category } = req.body;
-
-//       // Check if the provided category exists
-//       let existingCategory = await category.findOne({ categoryName: category });
-
-//       // If the category doesn't exist, create a new category
-//       if (!existingCategory) {
-//         console.log("Creating a new category:", category);
-//         existingCategory = new category({
-//           categoryName: category,
-//         });
-//         await existingCategory.save();
-//       }
-
-//       const imageUrl = req.file ? req.file.path : ''; // Get the image URL from the uploaded file
-
-//       const newProduct = new product({
-//         name,
-//         description,
-//         price,
-//         quantity,
-//         manufacturer,
-//         imageUrl,
-//         createdAt,
-//         category: existingCategory._id,
-//       });
-
-//       const savedProduct = await newProduct.save();
-
-//       // Update the category to include the newly created product
-//       existingCategory.products.push(savedProduct._id);
-//       await existingCategory.save();
-
-//       res.send("Product added");
-//     } else {
-//       return res.status(403).json({ message: 'Permission Denied: Access restricted.' });
-//     }
-//     })
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("Error adding product");
-//   }
-// }
-
-
-
-
-
-
-// // add product ccontroller -- post
-// exports.addProductPost = async (req, res) => {
-
-//   try {
-//     // Check if the authenticated user's role is admin or employee
-//     if (req.user && req.user.role.toLowerCase() === 'admin' || 'employee' ) {
-      
-//     const { name, description, price,quantity,manufacturer,createdAt,category } = req.body;
-
-//     // Check if the provided category exists
-//     let existingCategory = await category.findOne({ categoryName :category });
-
-//     // If the category doesn't exist, create a new category
-//     if (!existingCategory) {
-//       console.log("Creating a new category:", category);
-//       existingCategory = new category({
-//         categoryName : category
-//       });
-//       await existingCategory.save();
-//     }
-//     const imageUrl = req.file ? req.file.path : ''; // Get the image URL from the uploaded file
-
-//     const newProduct = new product({
-//       name,
-//       description,
-//       price,
-//       quantity,
-//       manufacturer,
-//       imageUrl,
-//       createdAt,
-//       category: existingCategory._id,
-//     });
-
-//     const savedProduct = await newProduct.save();
-
-//     // Update the category to include the newly created product
-//     existingCategory.products.push(savedProduct._id);
-//     await existingCategory.save();
-
-//     res.send("Product added");
-//   } 
-//   else{
-//     return res.status(403).json({ message: 'Permission Denied: Access restricted.' });
-//   }
-//   }
-//   catch (error) {
-//     console.error(error);
-//     res.status(500).send("Error adding product");
-//   }
-// }
-
-
-
- 
-
-
-
-
 // Get all categories with associated products
-
 
 // Get all categories
 exports.getAllCategories = async (req, res) => {
@@ -286,12 +104,8 @@ exports.getAllCategories = async (req, res) => {
   }
 };
 
-
-
-
-
-const Category = require('path/to/CategoryModel'); // Import your Category model
-const Product = require('path/to/ProductModel'); // Import your Product model
+// const Category = require('path/to/CategoryModel'); // Import your Category model
+// const Product = require('path/to/ProductModel'); // Import your Product model
 
 // ...
 
@@ -306,7 +120,6 @@ const Product = require('path/to/ProductModel'); // Import your Product model
 //     if (!foundCategory) {
 //       return res.status(404).send('Category not found');
 //     }
-
 //     // Retrieve the associated products for the found category
 //     const productsInCategory = await Product.find({ category: foundCategory._id });
 
@@ -316,8 +129,6 @@ const Product = require('path/to/ProductModel'); // Import your Product model
 //     res.status(500).send(`Error retrieving products in the "${categoryName}" category`);
 //   }
 // };
-
-
 
 // Get all products where category name is "food"
 exports.getAllProductsInCategory = async (req, res) => {
