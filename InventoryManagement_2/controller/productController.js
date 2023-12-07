@@ -91,9 +91,7 @@ exports.addProductPost = async (req,res)=> {
   }
 }
 
-// Get all categories with associated products
-
-// Get all categories
+// Get all categories with associated products// Get all categories
 exports.getAllCategories = async (req, res) => {
   try {
     const allCategories = await category.find()
