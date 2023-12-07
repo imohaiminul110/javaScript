@@ -27,7 +27,8 @@ app.use('/api/', authRouter)
 //user route
 app.use('/api/user', userRouter)
 
-
+//transaction route
+app.use()
 
 // Not available route
 app.use((req, res, next) => {
