@@ -41,7 +41,7 @@ exports.transactionHome = async (req, res) => {
       });
   
       // Populate the user and product fields
-      //await newTransaction.populate('username product').execPopulate();
+      await newTransaction.populate('username product')
   
       // Save the newTransaction
       await newTransaction.save();
@@ -54,98 +54,48 @@ exports.transactionHome = async (req, res) => {
   };
 
 
+//admin view all the request product with employee and product details
+// exports.adminViewRequestedPrpoduct = async (req,res)=>{
 
+//   let requestedProduct = await Transaction.find({})
+//   res.send(requestedProduct)
 
-
-
-
-
-
-// exports.requestProduct = async (req, res) =>{
-//     try {
-//         let existingUser = await User.findOne({username : User})
-//         console.log("username :" , existingUser );
-//         if(!existingUser){
-//             res.send("user not found")
-//         }
-//         await existingUser.save()
-//         let existingProduct = await Product.findOne({product : Product})  
-//         console.log("product : " , existingProduct);
-//         if(!existingProduct){
-//             res.send("product not found")
-//             console.log("object");
-//             await existingProduct.save()
-//             const newTransaction = new Transaction({
-//                     username: existingUser._id, 
-//                     product : existingProduct._id,
-//                     quantity : req.body.quantity,
-//                     type : request,
-//                     specification : req.body.specification,
-//                     remarks : req.body.remarks,
-//                     requestStatus : pending,   
-//                     timestamp : req.body.timestamp,
-//             })
-//             await newTransaction.populate('User Product').execPopulate();
-//             newTransaction.save()
-            
-//             .then(()=> res.send("uploaded"))
-//             .catch((err)=> console.log(err))
-        
-        
-        
-//         }
-//             }
-        
-//     catch (error) {
-//         console.log(error)
-//     }
 // }
 
 
 
 
+exports.adminViewRequestedPrpoduct = async (req, res) => {
+  try {
+    // Find all transactions and populate the 'username' and 'product' fields
+    const requestedProducts = await Transaction.find({})
+      .populate('username', 'fullName email phoneNumber') // Specify the user details you want to populate
+      .populate('product', 'name description price quantity manufacturer'); // Specify the product details you want to populate
 
-//   exports.requestProduct = async (req, res) => {
-//     try {
-//         const { userName, productName, quantity, type, specification, remarks } = req.body;
+    if (!requestedProducts || requestedProducts.length === 0) {
+      return res.status(404).send('No requested products found');
+    }
 
-//       // You might want to add validation for the input data here
+    // Map the transactions to include populated user and product details
+    const transactionsWithDetails = requestedProducts.map((transaction) => {
+      return {
+        _id: transaction._id,
+        username: transaction.username, // This will now be the populated user details
+        product: transaction.product, // This will now be the populated product details
+        quantity: transaction.quantity,
+        type: transaction.type,
+        specification: transaction.specification,
+        remarks: transaction.remarks,
+        requestStatus: transaction.requestStatus,
+        returnStatus: transaction.returnStatus,
+        timestamp: transaction.timestamp,
+      };
+    });
 
-//       // Find the corresponding User and Product by name
-//       const user = await User.findOne({ username: userName });
-//       if (!user) {
-//         return res.status(404).json({ error: 'User not found' });
-//       }
-
-//       const product = await Product.findOne({ name: productName }); 
-//        if (!product) {
-//         return res.status(404).json({ error: ' product not found' });
-//       }
-
-//       // Create a new transaction with the found user and product IDs
-//       const newTransaction = new Transaction({
-//         username: user._id,
-//         product: product._id,
-//         quantity,
-//         type : "request",
-//         specification,
-//         remarks,
-//         requestStatus: 'pending',
-//         returnStatus: null,
-//       });
-
-//       // Save the transaction to the database
-//       await newTransaction.save();
-
-//       // Populate the username and product fields before sending the response
-//       let k = await newTransaction.populate('username', 'product');
-// console.log(k);
-//       res.status(201).json({ message: 'Transaction requested successfully', transaction: newTransaction });
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     }
-//     }
-        
-
+    res.status(200).json(transactionsWithDetails);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
