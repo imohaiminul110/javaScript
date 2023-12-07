@@ -5,16 +5,9 @@ const passport = require('passport');
 
 // Update your productRouter in routes.js
 const productController = require('../controller/productController');
-//const upload = require('../controller/productController'); // Import the upload middleware
-
-
-
-// const productController = require("../controller/productController")
-// const upload = require('../controller/productController');
 
 //product home route
 productRouter.get('/', passport.authenticate('jwt', { session: false }), productController.productHome)
-
 
 //add product route -- post
 productRouter.post('/addProduct',  passport.authenticate('jwt', { session: false }), productController.addProductPost);

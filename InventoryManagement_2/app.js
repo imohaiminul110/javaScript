@@ -9,6 +9,10 @@ const User = require("./models/user.model");
 const authRouter = require("./routes/authRouter")
 const userRouter = require("./routes/userRouter")
 const productRouter = require("./routes/productRouter")
+const transactionRouter = require("./routes/transactionRouter")
+
+
+
 const database = require("./config/database")
 const passport = require('passport');
 app.use(passport.initialize());
@@ -28,7 +32,8 @@ app.use('/api/', authRouter)
 app.use('/api/user', userRouter)
 
 //transaction route
-app.use()
+//app.use('/api/transac', transactionRouter)
+app.use('/api/transaction', transactionRouter)
 
 // Not available route
 app.use((req, res, next) => {

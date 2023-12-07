@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema({
-  user: {
+  username: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'user',
     required: true,
   },
   product: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Product',
+    ref: 'product',
     required: true,
   },
   quantity: {
