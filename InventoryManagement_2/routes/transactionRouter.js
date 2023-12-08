@@ -11,6 +11,8 @@ transactionRouter.post('/requestProduct', transactionController.requestProduct )
 //admin view request for products
 transactionRouter.get('/adminViewRequestedPrpoduct', transactionController.adminViewRequestedPrpoduct)
 
+//admin approve the request
+transactionRouter.post('/adminApproveRequest', transactionController.adminApproveRequest)
 
 
 

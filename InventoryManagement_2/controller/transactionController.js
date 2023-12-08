@@ -55,21 +55,12 @@ exports.transactionHome = async (req, res) => {
 
 
 //admin view all the request product with employee and product details
-// exports.adminViewRequestedPrpoduct = async (req,res)=>{
-
-//   let requestedProduct = await Transaction.find({})
-//   res.send(requestedProduct)
-
-// }
-
-
-
 
 exports.adminViewRequestedPrpoduct = async (req, res) => {
   try {
     // Find all transactions and populate the 'username' and 'product' fields
-    const requestedProducts = await Transaction.find({})
-      .populate('username', 'fullName email phoneNumber') // Specify the user details you want to populate
+    const requestedProducts = await Transaction.find({requestStatus : "approved"})
+      .populate('username', 'fullName email phoneNumber' ) // Specify the user details you want to populate
       .populate('product', 'name description price quantity manufacturer'); // Specify the product details you want to populate
 
     if (!requestedProducts || requestedProducts.length === 0) {
@@ -98,4 +89,14 @@ exports.adminViewRequestedPrpoduct = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+
+
+
+//admin approve the request
+
+exports.adminApproveRequest = async (req, res)=>{
+  const requestedProducts = await Transaction.find({requestStatus : "approved"})
+      .populate('username', 'fullName email phoneNumber' ) // Specify the user details you want to populate
+      .populate('product', 'name description price quantity manufacturer'); // Specify the product details you want to populate
+}
 
