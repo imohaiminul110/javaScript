@@ -100,3 +100,7 @@ exports.adminApproveRequest = async (req, res)=>{
       .populate('product', 'name description price quantity manufacturer'); // Specify the product details you want to populate
 }
 
+
+
+
+
