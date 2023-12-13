@@ -27,6 +27,10 @@ exports.transactionHome = async (req, res) => {
       if (!existingProduct) {
         return res.status(404).send("Product not found");
       }
+
+      if (req.body.quantity > existingProduct.quantity) {
+        return res.status(400).send("Insufficient product quantity");
+      }
   
       // Create a new Transaction
       const newTransaction = new Transaction({
@@ -59,7 +63,7 @@ exports.transactionHome = async (req, res) => {
 exports.adminViewRequestedPrpoduct = async (req, res) => {
   try {
     // Find all transactions and populate the 'username' and 'product' fields
-    const requestedProducts = await Transaction.find({requestStatus : "approved"})
+    const requestedProducts = await Transaction.find({requestStatus : "pending"})
       .populate('username', 'fullName email phoneNumber' ) // Specify the user details you want to populate
       .populate('product', 'name description price quantity manufacturer'); // Specify the product details you want to populate
 
@@ -94,13 +98,36 @@ exports.adminViewRequestedPrpoduct = async (req, res) => {
 
 //admin approve the request
 
-exports.adminApproveRequest = async (req, res)=>{
-  const requestedProducts = await Transaction.find({requestStatus : "approved"})
-      .populate('username', 'fullName email phoneNumber' ) // Specify the user details you want to populate
-      .populate('product', 'name description price quantity manufacturer'); // Specify the product details you want to populate
-}
+exports.adminApproveRequest = async (req, res) => {
+  const { _id, requestStatus } = req.body;
 
+  try {
+    const transaction = await Transaction.findOne({ _id }).populate('product');
 
+    if (!transaction) {
+      return res.status(404).json({ message: 'Transaction not found' });
+    }
 
+    // Check if the requested quantity is greater than the available quantity
+    const updatedQuantity = transaction.product.quantity - req.body.quantity;
 
+    if (updatedQuantity < 0) {
+      return res.status(400).json({ error: 'Insufficient quantity for approval' });
+    }
 
+    // Update the transaction status
+    transaction.requestStatus = requestStatus;
+
+    // Save the updated transaction
+    await transaction.save();
+
+    // Update the product quantity
+    transaction.product.quantity = updatedQuantity;
+    await transaction.product.save();
+
+    return res.json({ message: `Transaction ${requestStatus ? 'approved' : 'rejected'}` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error processing approval' });
+  }
+};
