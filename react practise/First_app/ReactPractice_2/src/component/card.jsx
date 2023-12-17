@@ -4,6 +4,9 @@ const dateName = date.getDate();
 const monthName = date.getMonth();
 const currentYear = date.getFullYear();
 
+
+//functional component
+
 function Card(props)
 {
     
