@@ -24,7 +24,7 @@ function App() {
  
       <Header/> <br/>
       <AddContact></AddContact> <br/>
-      <ContactList></ContactList>
+      <ContactList contacts = {contacts} >  </ContactList>
 
     </>
   )
