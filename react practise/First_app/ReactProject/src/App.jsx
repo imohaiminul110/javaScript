@@ -6,14 +6,13 @@ import ContactList from "./components/ContactList"
 function App() {
 
   const [contacts, setContacts] = useState([])
-  const AddContactHandler = (contacts) => {
-    console.log(contacts)
-    setContacts({...contacts, contacts})
+  const AddContactHandler = (contact) => {
+    console.log(contact)
+    setContacts([...contacts, contact])
   }
 
   return (
     <>
-
       <Header/> <br/>
       <AddContact AddContactHandler = {AddContactHandler}></AddContact> <br/>
       <ContactList contacts = {contacts} >  </ContactList>
