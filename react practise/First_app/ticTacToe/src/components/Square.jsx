@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 
-const Square = ({value}) => {
+const Square = ({value, OnSquareClick}) => {
     // const [value, setValue] = useState(null);
 
     // const handleClick = () => {
@@ -13,7 +13,7 @@ const Square = ({value}) => {
     return (
     <>
     <div>
-        <button >
+        <button onClick={OnSquareClick} >
             {value}
         </button>
     </div>

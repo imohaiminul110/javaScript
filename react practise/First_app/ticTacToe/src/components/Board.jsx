@@ -8,19 +8,19 @@ const Board = () => {
     return(
         <>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}> 
-            <Square value={Squares[0]}/>
-            <Square value={Squares[1]}/> 
-            <Square value={Squares[2]}/>
+            <Square value={Squares[0]} OnSquareClick= {handleClick}/>
+            <Square value={Squares[1]} OnSquareClick= {handleClick}/> 
+            <Square value={Squares[2]} OnSquareClick= {handleClick}/>
          </div> 
          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Square value={Squares[3]}/>
-            <Square value={Squares[4]}/>
-            <Square value={Squares[5]}/>
+            <Square value={Squares[3]} OnSquareClick= {handleClick}/>
+            <Square value={Squares[4]} OnSquareClick= {handleClick}/>
+            <Square value={Squares[5]} OnSquareClick= {handleClick}/>
          </div>
          <div style={{ display: 'flex', justifyContent: 'space-between' }} >
-            <Square value={Squares[6]}/>
-            <Square value={Squares[7]}/>
-            <Square value={Squares[8]}/>
+            <Square value={Squares[6]} OnSquareClick= {handleClick}/>
+            <Square value={Squares[7]} OnSquareClick= {handleClick}/>
+            <Square value={Squares[8]} OnSquareClick= {handleClick}/>
          </div>
         </>
     );
