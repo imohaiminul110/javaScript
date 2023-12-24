@@ -1,0 +1,102 @@
+mongosh
+test-> show dbs  ---- show all the database
+db
+use bookstrore ------ select booksttore database to use
+show collections -----all the table in selected database
+db.books
+db.books.insertOne({title : "name", genre: ["fantasy","action"]}) ----- for insert one document
+
+db.authors.insertOne({name: "name"}) ---it will create new table which not created before and insert one document
+
+db.books.insertMane([{ttile : "name", genres : ["fantasy","action"]}, {Ttile}: "name", genres : ["fantasy","action"]}]) ------ it will insert multiple document
+
+db.books.find() ---- it will find all the documents
+
+db.books.find({name: "name"}) ---- condition for find 
+
+db.books.find({name: "name", id: "id"}) ---- both condition for find 
+
+db.books.find({author:"mon"},{title:1,author:1}) --- it will find just the title and author of all findinds
+
+db.books.find({}), {title:1, author:1} ---- it will show only title and author of all documents
+
+db.books.findOne({_id:--objectIDNO--}) -- it will find though id
+
+db.books.find().count() --- it will count total num of documents
+
+db.books.find({author: "mon"}).count() ---- it will count total number of document where author mon
+
+db.books.find().limit(3) --- it will show 3 findinds
+
+db.books.find().sort({title: 1/-1}) ----it will show ascending order descending order as title name 1 for ascending order  -1 for descending order
+
+db.books.find().sort({title : 1/-1}).limit(3) -- same as sort it just limit the findings
+
+db.books.insertOne({title: "prince",author: "mon",pages: "100",rating: "5",genres: ["chillings", "playing"], reviews: [{name: "yoshi", body: "great work"}, {name: "mario", body: "so so"}]})  ----nested document--- document inside document
+
+db.books.insertMane() --- for insert many
+
+db.books.find({rating: {$gt : 8}}) ---- greater then 8
+---
+gt > greater than
+gte> greater than and equal
+lt > smaller than or little than
+lte> smaller than and equal
+
+db.books.find({rating: {$gt : 8}, author: "mon"}) ---- double condition
+
+db.books.find({$or: [{rating: 8}, {author: "mon" }]}) --OR condition
+
+db.books.find({$or: [{pages: {$lt:300}}, {pages: {$gt:400} }]})  --- condition inside condition
+
+db.books.find({rating: {$in: [7,8,9]}}) --- it will work like OR operator but it looks simple
+
+db.books.find({rating: {$nin: [7,8,9]}}) ---- not in 
+
+
+
+db.books.deleteOne({_id: objectId(---)})  ---- for delete one document
+
+db.books.deleteMany({author: "mon"}) --- for delete more than one document
+
+db.books.updateOne({_id:ObjectId("idddd")}, {$set: {rating: 8, pages: 360}}) ---- for update one document data
+
+db.books.updateMany({author: "mon"}, {$set: {author: "moon"}}) -- for update many document
+
+db.books.updateOne({_id:ObjectId("idddd")}, {$inc: {pages: 2}}) --- pages number will be increment by 2 
+
+db.books.updateOne({_id:ObjectId("idddd")}, {$inc: {pages: -2}}) --- pages number will be decrement by 2 
+
+db.books.updateOne({_id:ObjectId("idddd")}, {$pull: {genres: "fantasy"}}) -- to remove one element from an array. 
+
+db.books.updateOne({_id:ObjectId("idddd")}, {$push: {genres: "fantasy"}}) -- to insert one element in an array
+
+db.books.updateOne({_id:ObjectId("idddd")}, {$push: {genres: {$each: ["1", "2"]}}}) -- to insert more than one elee=ment in an array
+
+
+db.books.find().pretty() -- it will look good
+
+
+db.books.deleteOne({name: mon}) --- it will delete
+
+
+npm install express 
+npm install express --save ---->> difference
+
+
+npm install nodemon
+npm install -g nodemon
+nodemon app ---->> difference
+
+access modifier ba return ki function e use kora lage na
+
+
+no sql 
+Database ---> colections(table) ---> documents (row)
+
+
+{"title": "prince","author": "mon","pages": "100","rating": "5","genres": ["chillings", "playing"]}
+
+
+
+
