@@ -6,21 +6,21 @@ const Home = () => {
     const [data, setData] = useState([])
     // const navigate = useNavigate();
     useEffect(()=>{
-        axios.get('http://localhost:3000/users')
+        axios.get('http://localhost:5000/api/product/products')
         .then(res=> setData(res.data) )
         .catch(err => console.log(err))
     }, [])
 
-    const handleDelete = (id) => {
-        const confirm = window.confirm("sure delete? ")
-        if(confirm){
-            axios.delete('http://localhost:3000/users/'+id)
-            .then(res => {
-                location.reload();
+    // const handleDelete = (id) => {
+    //     const confirm = window.confirm("sure delete? ")
+    //     if(confirm){
+    //         axios.delete('http://localhost:3000/users/'+id)
+    //         .then(res => {
+    //             location.reload();
 
-            }).catch(err => console.log(err))
-        }
-    }
+    //         }).catch(err => console.log(err))
+    //     }
+    // }
 
   return (
     <>
@@ -43,13 +43,14 @@ const Home = () => {
                 {
                     data.map((d, i) => (
                         <tr key={i}>
-                            <td>{d.id}</td>
                             <td>{d.name}</td>
-                            <td>{d.phone}</td>
+                            <td>{d.description}</td>
+                            <td>{d.price}</td>
+                            <td>{d.category.categoryName}</td>
                             <td>
-                                <Link to={`/read/${d.id}`}  className='btn btn-sm btn-info me-2 ' >Read</Link>
+                                {/* <Link to={`/read/${d.id}`}  className='btn btn-sm btn-info me-2 ' >Read</Link> */}
                                 <button className='btn btn-sm btn-primary me-2 ' >Edit</button>
-                                <button onClick={e => handleDelete(d.id)} className='btn btn-sm btn-danger ' >Delete</button>
+                                {/* <button onClick={e => handleDelete(d.id)} className='btn btn-sm btn-danger ' >Delete</button> */}
                             </td>
                         </tr>
                     ) )
