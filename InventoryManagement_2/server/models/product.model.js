@@ -29,11 +29,6 @@ const productSchema = mongoose.Schema({
         type: Date,
         default: Date.now,
       },
-    category: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'category',
-        required: true,
-      },
 });
 const product = mongoose.model("product", productSchema)
 module.exports = product;

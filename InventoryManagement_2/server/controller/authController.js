@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
-const passport = require('../config/passport');
+// const passport = require('../config/passport');
 const User = require("../models/user.model");
 
-const saltRounds = 10;
+// const saltRounds = 10;
 
 //home controller
 exports.index = (req,res)=>{
@@ -22,16 +22,19 @@ exports.registerUser = async (req, res) => {
     
    const { username, password, email, role, department, fullName, phoneNumber, address } = req.body;
    console.log("3");
-
+   if (!password) {
+    return res.status(400).json({ message: 'Password is required' });
+}
     // Check if the username or email is already taken
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
       return res.status(400).json({ message: 'Username or email is already taken' });
     }
-
+    console.log("33");
     // Hash the password before saving it to the database
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
+    
     console.log("4");
     // Create a new user based on the User schema
     const newUser = new User({
@@ -50,6 +53,7 @@ exports.registerUser = async (req, res) => {
     // Save the new user to the database
     const savedUser = await newUser.save();
     console.log("6");
+    
     // Omit the hashed password from the response for security
     const userWithoutPassword = savedUser.toObject();
     delete userWithoutPassword.password;

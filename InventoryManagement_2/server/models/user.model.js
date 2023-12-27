@@ -50,15 +50,7 @@ const userSchema = mongoose.Schema({
   },
 
   address: {
-    street: {
-      type: String,
-      trim: true,
-    },
     city: {
-      type: String,
-      trim: true,
-    },
-    state: {
       type: String,
       trim: true,
     },

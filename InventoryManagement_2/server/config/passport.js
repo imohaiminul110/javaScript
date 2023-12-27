@@ -14,8 +14,10 @@ passport.use(new JwtStrategy(opts, async function (jwt_payload, done) {
     try {
         const user = await User.findOne({ _id: jwt_payload.id }).exec();
         console.log("2");
-console.log('user', user);
-console.log('jwt_payload', jwt_payload);
+// console.log('user', user);
+console.log('user');
+// console.log('jwt_payload', jwt_payload);
+console.log('jwt_payload');
 console.log("14");
         if (user) {
             return done(null, user);

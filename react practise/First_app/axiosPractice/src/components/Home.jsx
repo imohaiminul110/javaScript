@@ -46,7 +46,7 @@ const Home = () => {
                             <td>{d.name}</td>
                             <td>{d.description}</td>
                             <td>{d.price}</td>
-                            <td>{d.category.categoryName}</td>
+                            {/* <td>{d.category.categoryName}</td> */}
                             <td>
                                 {/* <Link to={`/read/${d.id}`}  className='btn btn-sm btn-info me-2 ' >Read</Link> */}
                                 <button className='btn btn-sm btn-primary me-2 ' >Edit</button>
