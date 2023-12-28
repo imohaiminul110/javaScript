@@ -76,7 +76,7 @@ exports.loginUser = async (req, res) => {
         const user = await User.findOne({ username: req.body.username});
 
         if (!user) {
-            return res.send({
+            return res.status(401).send({
                 success: false,
                 message: "User not found",
             });
@@ -85,13 +85,13 @@ exports.loginUser = async (req, res) => {
         const userNotApproved = await User.findOne({ username: req.body.username , isApproved : true});
 
         if (!userNotApproved) {
-            return res.send({
+            return res.status(401).send({
                 success: false,
                 message: "User not approved",
             });
         }
         if (!bcrypt.compareSync(req.body.password, user.password)) {
-            return res.send({
+            return res.status(401).send({
                 success: false,
                 message: "Incorrect password",
             });
