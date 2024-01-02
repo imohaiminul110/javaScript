@@ -1,0 +1,3 @@
+﻿endpoint,email,password
+api/register/qa,abc@gmail.com,abc
+api/register/reg,abcd@gmail.com,abcd

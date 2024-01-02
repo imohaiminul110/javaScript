@@ -79,6 +79,10 @@ const Login = () => {
             <button className='btn btn-success' >Submit</button>
             <Link to="/" className='btn btn-primary ms-3' >Back</Link>
         </form>
+        <div>
+          <h5>Go to registration </h5>
+          <Link to="/Registration" className='btn btn-primary ms-3' >Register</Link>
+        </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,12 @@
+[
+  {
+    "endpoint": "api/register/qa",
+    "email": "abc@gmail.com",
+    "password": "abc"
+  },
+  {
+    "endpoint": "api/register/reg",
+    "email": "abcd@gmail.com",
+    "password": "abcd"
+  }
+]

@@ -1,0 +1,69 @@
+you will just give me that schema that which schema i will need as by query
+
+
+
+i want that after log in every user like admin or employee of different department  they will have all their different pages. 
+
+and after login they will have their dashboard.  employees In their dashboard they will have multiple options like their history that when they took any product or when they return back that product. 
+
+they will have a option that they can request a product to admin or other employee who already have it requesting from them, and their will also have return option that when he/she want to return to whom. and also they will need to give description about product that why they need it and the quantity of the product for request and return both time.
+
+ here is one thing they will return it only to admin. if any other employee request a product to other employee they will just accept the request. 
+
+ When a employee or admin wants to see that which product is with which employee they can see that a product with which employee and also quantity
+
+there will be track of all product. that a product used by which which employee and the time period and quantity also. 
+
+when there need to buy any product all the product buying information will be included also. any employee can buy product and entry the product info and admin will approved. 
+
+lets assume all the requirement   as  1.0 . I will add more with 1.0 later
+
+
+
+
+
+
+
+
+
+
+
+
+Certainly! Let's go through how the provided schema can work in the context of an inventory management system:
+
+1. User Authentication and Authorization:
+Users (Admins and Employees) will log in with their username and password.
+Upon login, the system will verify their credentials and assign them a role (admin or employee).
+The role determines the level of access and permissions a user has within the system.
+2. Dashboard:
+Upon logging in, users will be directed to their respective dashboards based on their roles.
+Admins and Employees will have different dashboard views.
+3. Product Requests:
+Employees can request products from Admins or other Employees.
+They will provide details like the product name, quantity, and a description of why they need the product.
+Requests will be recorded in the Transaction model with a 'pending' requestStatus.
+Admins can view all pending requests and approve or reject them.
+4. Product Returns:
+Employees can return products to Admins.
+They will provide details like the product name, quantity, and any additional notes.
+Return transactions will be recorded in the Transaction model with a 'pending' returnStatus.
+Admins can view pending returns and mark them as 'completed' after processing.
+5. Transaction History:
+All transactions, including requests, returns, and purchases, are recorded in the Transaction model.
+The timestamp field captures when each transaction occurs.
+6. Product Quantity Tracking:
+The Product model includes a quantity field that is updated based on transactions (in or out).
+The Transaction model records the quantity associated with each transaction.
+7. Product Purchases:
+Employees can enter information about product purchases.
+Admins will review and approve or reject these purchase entries.
+Approved entries will update the Product model with new quantities.
+8. Product Assignments:
+Admins can track which products are assigned to which Employees.
+The Transaction model records product assignments and returns.
+9. Reporting and Analysis:
+Admins can generate reports and analyze transaction history to understand product usage, trends, and inventory status.
+10. Additional Considerations:
+Implement middleware or hooks to enforce business rules, such as checking product availability before approving requests.
+Set up proper relationships and indexes in the database to optimize queries.
+Remember, this is a high-level overview, and the implementation details will depend on the specific requirements of your application and business logic. You may also need to consider additional features and error handling based on your use case.

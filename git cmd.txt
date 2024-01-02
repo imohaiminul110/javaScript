@@ -1,0 +1,13 @@
+git init
+0
+1
+3git commit -m"xf"
+0git remote add origin http:Clone
+3git push origin master
+
+# shows username
+git config user.name
+
+# shows email
+git config user.email
+

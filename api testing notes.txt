@@ -1,0 +1,207 @@
+rest api
+========
+--managing the resources
+-- creating and updating the resources
+-- represent of thease resources
+-- pass representation state from one layer to another
+
+
+what actually are rest api
+
+rest api implemented over http protocall it will be composed of a URI -- (Uniform Resource Identifier ) which points excatly  some resouce in your database
+
+http://myapp/customer/1 --> a URI
+ this is also known as api endpoint or path 
+
+
+ path parameter
+http://myapp/customer/1 this is a path parameter
+      ------ --------
+      domain String
+       name  (resource name)
+      server
+       (DNS)
+
+
+different parameer will show diff resources
+
+
+request payload or request body
+==============================
+the json the body or the data we are sending 
+
+
+response body
+=============
+whatever we are getting return is response body
+
+
+asyncronous api
+===============
+when a client send request something to server, server send a token to client at http status code 202 that it is accepted in the g=header of the client 
+after accepted when the request when servers processing is completed it send that token the update which in the header of that client that is it fail or done or sometj=hing
+
+
+
+query parameter
+http://myapp/customer?age=25
+if has some condition for show data from recorses
+
+
+
+
+get
+post
+====
+create a resource
+
+put 
+===
+if the resource exist update the resource
+if the resource does not exist create the resource
+update all attributes
+replace whole resource
+
+patch
+=====
+just change few attributes
+it will update only required attributes
+
+delete
+
+
+
+
+
+
+http is a protocall to communicate with client and server.. client server protocall
+
+http://
+
+
+http response code 
+==================
+
+informational response -- 100-199
+successfull response -- 200-299
+redirectional message -- 300-399
+client error messafe -- 400-499 //problem on client side
+server errrir msg -- 500-599// problem on server side
+
+
+postman variables
+=================
+postman
+ globar variable
+  collection variable
+   environment variable
+    data variables ==> for data driven testing
+     local variable ==> using automatic script or javaScript Script
+
+
+
+
+in variable
+===========
+current value will be the main url 
+and initial value will be shared with teammate
+if in current value there is a password in initial value there will be put your password
+
+
+
+path variable
+=============
+
+not changing in the path but to change in the path variable 
+
+like this  
+https://fakestoreapi.com/products/:id
+
+
+
+query variable
+==============
+
+to filter from an array 
+like from 1 to 00 
+
+it is called query parameter
+for execute a query in postman
+
+https://fakestoreapi.com/products?limit=5
+
+
+json
+====
+javaScript object notation
+
+lightweight data interchange formate
+
+
+header
+======
+
+it is additional information of a request that server can understand what sort type of request a server is having like a percel that has barcode
+or how it has to be delivert or when it has to be delivert 
+
+like in content-type there will be declared the additional info about the content if the value of content will be text or json
+
+accept will tell the server that postman can process or understand all form of response content type 
+if in accept there is mention as a application json then the accept will show an error if there is other formste or value like text
+
+
+
+jira api testing
+================
+
+jira account, documentation
+
+jira get account need basic auth user email token header 
+
+payload ==> payload of an api is that the data we are to transport to the server when we make an api request
+
+
+end to end ==> this means when we need to test the entire application including both ui and api layers from start to finish
+
+
+
+jira create issue ==>
+
+projecct id -- 10000
+story id -- 10001
+project key -- KAN
+account id -- 622dab69442e0e0069eb8ecb
+
+
+
+pre-req ==== tests
+===================
+pre req is before executing the api tesing
+and tests will be after executing the api texing
+
+
+var let const
+=============
+
+in LET same variable name can not be assign inside a same block or same scope
+
+same thing for const
+
+in VAR there can be assign multiple time inside one scope. then for executing the first one will take the value
+var can be accesable from any where in the script not only from the scoop or block considering like a global variable
+
+
+
+data driven
+===========
+
+excel file in .csv extension
+
+
+
+
+
+
+
+
+
